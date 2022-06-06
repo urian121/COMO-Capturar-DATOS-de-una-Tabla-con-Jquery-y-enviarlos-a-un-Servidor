@@ -13,7 +13,6 @@
     <link href="assets/css/material.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="./assets/css/loader.css">
-   
 </head>
     <body>
         <header>
@@ -53,52 +52,60 @@
         </div>
 
 
+        <?php
+          $usuario  = "root";
+          $password = "";
+          $servidor = "localhost";
+          $basededatos = "ejemplo_youtube";
+          $con = mysqli_connect($servidor, $usuario, $password) or die("No se ha podido conectar al Servidor");
+          mysqli_query($con,"SET SESSION collation_connection ='utf8_unicode_ci'");
+          $db = mysqli_select_db($con, $basededatos) or die("Upps! Error en conectar a la Base de Datos");
 
-          <div class="container">
+          $sqlTrabajadores = ("SELECT * FROM trabajadores");
+          $query = mysqli_query($con, $sqlTrabajadores);
+        ?>
+
+
+          <div class="container mb-5">
             <div class="row">
               <div class="col-md-12 text-center">
+              <div class="table-responsive">
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Apellido</th>
-                      <th scope="col">Sueldo</th>
-                      <th scope="col">Fecha de Ingreso</th>
+                    <th>ID</th>
+                    <th>NOMBRE</th>
+                    <th>APELLIDO</th>
+                    <th>EMAIL</th>
+                    <th>TELEFONO</th>
+                    <th>SUELDO</th>
+                    <th>FECHA DE INGRESO</th>
                     </tr>
                   </thead>
+                  <?php
+                  while ($dataRow = mysqli_fetch_array($query)) { ?>
                   <tbody>
-                    <tr class="trTrabajador" data-trabajador="1" data-id="1" id="trabajador1">
-                      <th scope="row">1 </th>
-                      <td>Karol</td>
-                      <td>Huzz</td>
-                      <td>2.500</td>
-                      <td>30/05/2022</td>
-                    </tr>
-                    <tr class="trTrabajador" data-id="2">
-                      <th scope="row">2</th>
-                      <td>Alberto</td>
-                      <td>Perez</td>
-                      <td>30200</td>
-                      <td>10/04/2021</td>
-                    </tr>
-                    <tr class="trTrabajador" data-id="3">
-                      <th scope="row">3</th>
-                      <td>Alejandro</td>
-                      <td>Torrez</td>
-                      <td>78544</td>
-                      <td>08/30/2021</td>
-                    </tr>
+                    <tr class="trTrabajador" data-trabajador="<?php echo $dataRow['id']; ?>" data-id="<?php echo $dataRow['id']; ?>" id="trabajador<?php echo $dataRow['id']; ?>">
+                        <td><?php echo $dataRow['id']; ?></td>
+                        <td><?php echo $dataRow['nombre']; ?></td>
+                        <td><?php echo $dataRow['apellido']; ?></td>
+                        <td><?php echo $dataRow['email'] ; ?></td>
+                        <td><?php echo $dataRow['telefono'] ; ?></td>
+                        <td><?php echo $dataRow['sueldo'] ; ?></td>
+                        <td><?php echo $dataRow['fecha_ingreso'] ; ?></td>
+                      </tr>
                   </tbody>
+                  <?php } ?>
                 </table>
-
+              </div>
               </div>
             </div>
           </div>
 
 
 
-    <footer class="footer grey darken-4">
+
+    <footer class="footer grey darken-4 mt-5">
       <div class="container center" style="padding-top: 5px;">
         <div class="row justify-content-md-center">
           <div class="col col-lg-5">
