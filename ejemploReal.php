@@ -82,9 +82,9 @@
                     <th>FECHA DE INGRESO</th>
                     </tr>
                   </thead>
+                  <tbody>
                   <?php
                   while ($dataRow = mysqli_fetch_array($query)) { ?>
-                  <tbody>
                     <tr class="trTrabajador" data-trabajador="<?php echo $dataRow['id']; ?>" data-id="<?php echo $dataRow['id']; ?>" id="trabajador<?php echo $dataRow['id']; ?>">
                         <td><?php echo $dataRow['id']; ?></td>
                         <td><?php echo $dataRow['nombre']; ?></td>
@@ -94,8 +94,8 @@
                         <td><?php echo $dataRow['sueldo'] ; ?></td>
                         <td><?php echo $dataRow['fecha_ingreso'] ; ?></td>
                       </tr>
-                  </tbody>
                   <?php } ?>
+                  </tbody>
                 </table>
               </div>
               </div>
@@ -149,7 +149,7 @@
     //Capturo el data-id de la fila seleccionada
     var id    =  $(this).attr("data-id");
 
-    //var trabajador = $(this).attr("data-trabajador");
+    var trabajador   = $(this).attr("data-trabajador");
     var trabajadorId = $(this).attr("id"); 
     console.log('La fila corresponde al ID: ' + id + trabajadorId)
 
